@@ -1,0 +1,25 @@
+{
+	"name": "minimal-react-ssr-gcp",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"@babel/cli": "^7.4.4",
+		"@babel/core": "^7.4.4",
+		"@babel/preset-env": "^7.4.4",
+		"@babel/preset-react": "^7.0.0",
+		"core-js": "^3.0.1",
+		"firebase-functions": "^2.3.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"webpack": "^4.30.0",
+		"webpack-cli": "^3.3.1",
+		"webpack-dev-server": "^3.3.1"
+	},
+	"scripts": {
+		"firebase": "yarn babel && cp server/package.json firebase/package.json && cp -r server/build firebase && firebase deploy --only functions",
+		"babel": "rm -rf firebase && mkdir firebase && babel server/index.js -o firebase/index.js --presets=@babel/preset-env && babel server/template.js -o firebase/template.js --presets=@babel/preset-env",
+		"build": "onerror 'webpack --config webpack.prod.js --mode production --display-error-details' -t 'The build has failed' -m 'Check the console to find out what went wrong.' -s 'Submarine'",
+		"build:server": "yarn build && webpack --config webpack.server.js --mode production"
+	}
+}

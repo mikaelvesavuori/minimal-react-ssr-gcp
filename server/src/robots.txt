@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://humblebee.surge.sh/sitemap.xml
