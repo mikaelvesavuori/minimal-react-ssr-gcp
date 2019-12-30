@@ -1,25 +1,39 @@
 {
-	"name": "minimal-react-ssr-gcp",
-	"version": "1.0.0",
-	"main": "index.js",
-	"license": "MIT",
-	"dependencies": {
-		"@babel/cli": "^7.4.4",
-		"@babel/core": "^7.4.4",
-		"@babel/preset-env": "^7.4.4",
-		"@babel/preset-react": "^7.0.0",
-		"core-js": "^3.0.1",
-		"firebase-functions": "^2.3.0",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"webpack": "^4.30.0",
-		"webpack-cli": "^3.3.1",
-		"webpack-dev-server": "^3.3.1"
-	},
-	"scripts": {
-		"firebase": "yarn babel && cp server/package.json firebase/package.json && cp -r server/build firebase && firebase deploy --only functions",
-		"babel": "rm -rf firebase && mkdir firebase && babel server/index.js -o firebase/index.js --presets=@babel/preset-env && babel server/template.js -o firebase/template.js --presets=@babel/preset-env",
-		"build": "onerror 'webpack --config webpack.prod.js --mode production --display-error-details' -t 'The build has failed' -m 'Check the console to find out what went wrong.' -s 'Submarine'",
-		"build:server": "yarn build && webpack --config webpack.server.js --mode production"
-	}
+  "name": "minimal-react-ssr-gcp",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "lodash-webpack-plugin": "^0.11.5",
+    "path": "^0.12.7",
+    "preload-webpack-plugin": "^2.3.0",
+    "script-ext-html-webpack-plugin": "^2.1.4",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "workbox-webpack-plugin": "^4.3.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "core-js": "^3.6.1",
+    "firebase-functions": "^3.3.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "scripts": {
+    "firebase": "yarn babel && cp server/package.json firebase/package.json && cp -r server/build firebase && firebase deploy --only functions",
+    "babel": "rm -rf firebase && mkdir firebase && babel server/index.js -o firebase/index.js --presets=@babel/preset-env && babel server/template.js -o firebase/template.js --presets=@babel/preset-env",
+    "build": "webpack --config webpack.config.js --mode production --display-error-details",
+    "build:server": "yarn build && webpack --config webpack.server.js --mode production"
+  }
 }
